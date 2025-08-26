@@ -3,49 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLOXRUPT</title>
+  <title>Bloxrupt Official Website</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(180deg, #111, #333);
       color: white;
-      padding: 40px;
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(-45deg, #000000, #1a1a1a, #330000, #660000);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     h1 {
-      margin-bottom: 20px;
+      font-size: 3em;
+      color: #ff3333;
+      margin-top: 40px;
+      margin-bottom: 15px;
     }
-    .link-btn {
+
+    h2 {
+      font-size: 1.3em;
+      color: #bbbbbb;
+      margin-bottom: 40px;
+    }
+
+    a.button, button.button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 20px 40px;
+      border-radius: 12px;
+      font-size: 1.4em;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .discord {
+      background: crimson;
+    }
+    .discord:hover {
+      background: #b2002d;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px crimson;
+    }
+
+    .generator {
+      background: #ff3333;
+      font-size: 2em;
+      padding: 30px 60px;
+    }
+    .generator:hover {
+      background: #cc0000;
+      transform: scale(1.07);
+      box-shadow: 0 0 20px #ff3333;
+    }
+
+    .platforms {
+      margin-top: 80px;
+    }
+    .platforms a {
       display: block;
+      width: 80%;
+      max-width: 400px;
       margin: 15px auto;
       padding: 15px;
-      width: 80%;
-      max-width: 300px;
-      background: #222;
-      border: 2px solid #555;
-      border-radius: 30px;
-      color: white;
-      text-decoration: none;
+      border-radius: 8px;
       font-size: 18px;
-      transition: 0.3s;
+      font-weight: bold;
     }
-    .link-btn:hover {
-      background: #555;
-    }
+
     .disabled {
-      opacity: 0.5;
-      pointer-events: none;
+      background: #444;
+      cursor: not-allowed;
+    }
+    .immortal {
+      background: #ff3333;
+    }
+    .immortal:hover {
+      background: #cc0000;
+      box-shadow: 0 0 12px #ff3333;
+    }
+    .backup {
+      background: #990000;
+    }
+    .backup:hover {
+      background: #770000;
+      box-shadow: 0 0 12px #ff0000;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>WELCOME TO BLOXRUPT</h1>
-  <p>Please choose what link you want to visit:</p>
+  <!-- PAGE 1 -->
+  <div id="page1">
+    <h1>BLOXRUPT</h1>
+    <h2>OFFICIAL WEBSITE OF BLOXRUPT BEAM LINK GENERATOR</h2>
 
-  <!-- Main site (coming soon, disabled) -->
-  <a href="#" class="link-btn disabled">Main Site (Coming Soon)</a>
+    <a href="https://discord.gg/9ruJUGHW2N" class="button discord">JOIN OUR DISCORD</a>
 
-  <!-- Backup site (your working link) -->
-  <a href="https://app.beamers.si/u/Bloxrupt" class="link-btn" target="_blank">Backup Site</a>
+    <div style="height:100px;"></div>
+
+    <button class="button generator" onclick="showPlatforms()">🚀 LAUNCH GENERATOR 🚀</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div id="page2" class="hidden">
+    <h2>Select Your Platform</h2>
+    <a href="#" class="button disabled">Main Site (Currently fixing)</a>
+    <a href="https://immortal.st/?code=OTIyMzQ4NjE4NTQ5NzYxODA0OA==" class="button immortal">Immortal Site</a>
+    <a href="https://app.beamers.si/u/Bloxrupt" class="button backup">Back Up Site</a>
+  </div>
+
+  <script>
+    function showPlatforms() {
+      document.getElementById("page1").classList.add("hidden");
+      document.getElementById("page2").classList.remove("hidden");
+    }
+  </script>
 </body>
 </html>
