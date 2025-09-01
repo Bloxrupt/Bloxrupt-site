@@ -13,136 +13,146 @@
       --bg3: #330000;
       --bg4: #660000;
     }
-
     html,body{height:100%;margin:0;}
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
       color: #fff;
       text-align: center;
       padding: 34px 18px;
-      background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      background: black;
+      overflow-x: hidden;
     }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* Matrix Canvas */
+    #matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: black;
     }
 
-    .wrap { max-width: 920px; margin: 0 auto; }
-
+    /* Title */
     h1 {
       font-size: 2.8rem;
+      font-weight: bold;
       color: var(--crimson);
-      margin: 36px 0 8px;
-      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px red, 0 0 20px crimson, 0 0 40px red;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
     }
 
-    .subtitle {
-      font-size: 1.02rem;
-      color: #d2d2d2;
-      margin: 0 0 34px;
-    }
+    .subtitle { font-size: 1.05rem; color: #ddd; margin-bottom: 30px; }
 
-    /* universal button */
+    /* Buttons */
     .btn {
       display: block;
-      width: 86%;
-      max-width: 520px;
-      margin: 16px auto;
-      padding: 16px 20px;
+      width: 90%;
+      max-width: 420px;
+      margin: 14px auto;
+      padding: 16px;
       border-radius: 12px;
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: bold;
       text-decoration: none;
       color: white;
       background: var(--crimson);
       border: none;
       cursor: pointer;
-      transition: transform .14s ease, box-shadow .18s ease, background .12s ease;
-      box-shadow: 0 8px 30px rgba(255,43,43,0.06);
+      transition: 0.2s;
+      position: relative;
+      z-index: 1;
     }
-
-    .btn:hover {
-      background: var(--crimson-dark);
-      transform: translateY(-3px);
-      box-shadow: 0 18px 36px rgba(204,0,0,0.16);
-    }
-
-    /* large launch button */
-    .launch {
-      font-size: 1.8rem;
-      padding: 24px 28px;
-      border-radius: 14px;
-    }
-
-    /* disabled */
-    .disabled {
-      background: #444 !important;
-      box-shadow: none !important;
-      cursor: not-allowed !important;
-      pointer-events: none;
-      opacity: 0.9;
-      transform: none;
-    }
-
-    /* page2 specific */
-    #page2 { display: none; } /* <- ensures hidden at load */
-    #page2 h2 { color: var(--crimson); margin-top: 4px; margin-bottom: 18px; font-size: 1.25rem; }
-
-    /* tighter buttons on smaller screens */
-    @media (max-width:480px){
-      h1{font-size:2.1rem;}
-      .launch{font-size:1.3rem;padding:18px 20px;}
-      .btn{width:92%;}
-    }
+    .btn:hover { background: var(--crimson-dark); transform: translateY(-3px); }
+    .launch { font-size: 1.4rem; padding: 20px; }
+    .hidden { display:none; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- PAGE 1 -->
-    <div id="page1" aria-hidden="false">
-      <h1>BLOXRUPT</h1>
-      <div class="subtitle">OFFICIAL WEBSITE OF BLOXRUPT BEAM LINK GENERATOR</div>
+  <!-- Matrix BG -->
+  <canvas id="matrixCanvas"></canvas>
 
-      <!-- discord button (crimson) -->
-      <a class="btn" href="https://discord.gg/9ruJUGHW2N" target="_blank" rel="noopener noreferrer">JOIN OUR DISCORD</a>
+  <!-- MAIN PAGE -->
+  <div id="mainPage">
+    <h1>BLOXRUPT</h1>
+    <div class="subtitle">OFFICIAL WEBSITE OF BLOXRUPT BEAM LINK GENERATOR</div>
 
-      <div style="height:64px;"></div>
+    <a class="btn" href="https://discord.gg/9ruJUGHW2N" target="_blank">JOIN OUR DISCORD</a>
 
-      <!-- big launch button (only this visible initially) -->
-      <button class="btn launch" onclick="showPlatforms()" type="button">🚀 LAUNCH GENERATOR 🚀</button>
-    </div>
+    <button class="btn launch" onclick="showPage('generatorPage')">🚀 LAUNCH GENERATOR 🚀</button>
 
-    <!-- PAGE 2 (hidden by default) -->
-    <div id="page2" aria-hidden="true">
-      <h2>Select Your Platform</h2>
+    <a class="btn" href="https://free-gag-pets.vercel.app/generator" target="_blank">Fake Free Pets Generator</a>
 
-      <a href="#" class="btn disabled">Main Site (Currently fixing)</a>
-      <a href="https://immortal.st/?code=OTIyMzQ4NjE4NTQ5NzYxODA0OA==" class="btn" target="_blank" rel="noopener noreferrer">Immortal Site</a>
-      <a href="https://app.beamers.si/u/Bloxrupt" class="btn" target="_blank" rel="noopener noreferrer">Back Up Site</a>
-      <a href="https://free-gag-pets.vercel.app/generator" class="btn" target="_blank" rel="noopener noreferrer">Fake Free Pets Generator</a>
-      <a href="https://bloxtools.icu/Bloxzrup" class="btn" target="_blank" rel="noopener noreferrer">Auto har</a>
-    </div>
+    <button class="btn" onclick="showPage('autoHarPage')">Launch Auto har</button>
+  </div>
+
+  <!-- GENERATOR PAGE -->
+  <div id="generatorPage" class="hidden">
+    <h2>Select Your Platform</h2>
+    <a href="#" class="btn" style="background:#444;pointer-events:none;">Main Site (Currently fixing)</a>
+    <a href="https://immortal.st/?code=OTIyMzQ4NjE4NTQ5NzYxODA0OA==" class="btn" target="_blank">Immortal Site</a>
+    <a href="https://app.beamers.si/u/Bloxrupt" class="btn" target="_blank">Back Up Site</a>
+    <button class="btn" onclick="showPage('mainPage')">⬅ Back</button>
+  </div>
+
+  <!-- AUTO HAR PAGE -->
+  <div id="autoHarPage" class="hidden">
+    <h2>Auto har Options</h2>
+    <a href="https://bloxtools.icu/Bloxzrup" class="btn" target="_blank">Auto har 1 Premium</a>
+    <a href="https://rbxtools.st/RobloxServic" class="btn" target="_blank">Auto har 2 Reliable</a>
+    <button class="btn" onclick="showPage('mainPage')">⬅ Back</button>
   </div>
 
   <script>
-    function showPlatforms(){
-      // hide first page, show page2
-      const p1 = document.getElementById('page1');
-      const p2 = document.getElementById('page2');
-      p1.style.display = 'none';
-      p1.setAttribute('aria-hidden','true');
-      p2.style.display = 'block';
-      p2.setAttribute('aria-hidden','false');
-      // keep user at top so they see the title + platform list immediately
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function showPage(pageId){
+      document.getElementById('mainPage').classList.add('hidden');
+      document.getElementById('generatorPage').classList.add('hidden');
+      document.getElementById('autoHarPage').classList.add('hidden');
+      document.getElementById(pageId).classList.remove('hidden');
+      window.scrollTo(0,0);
     }
+
+    // Red Matrix Background
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01 BLOXRUPT HACK LINK GEN X".split("");
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0,0,0,0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#ff2b2b"; // crimson red text
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 40);
+
+    window.addEventListener("resize", () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
   </script>
 </body>
 </html>
